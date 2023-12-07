@@ -27,6 +27,32 @@
     flex: 1;
   }
 
+  .modal-container { 
+    background-color: rgb(134, 1, 186);
+    border-radius: 10px;
+  }
+
+  .modal-title {
+    color: white
+  }
+
+  .save-button {
+    background-color: white;
+    color: rgb(134, 1, 186);
+  }
+
+  .save-button:hover  {
+    background-color: #d58cfc;
+  }
+
+  .save-button:active  {
+    background-color: #d58cfc;
+  }
+
+  .welcome-name {
+    padding-right: 20px;
+  }
+
   .toolbar {
     background-color: #d58cfc;
     color: white;
