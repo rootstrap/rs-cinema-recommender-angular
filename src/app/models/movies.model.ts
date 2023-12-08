@@ -1,5 +1,8 @@
+import { User } from "./users.model";
+
 export interface Movie {
     id?: string;
     title: string;
-    voteCount: number;
+    thumbsUp: User[];
+    thumbsDown: User[];
 }

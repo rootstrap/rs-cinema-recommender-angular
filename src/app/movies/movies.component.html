@@ -1,7 +1,9 @@
 <h1 class="movies-container"> Qué películas recomiendan los Rootstrappers?</h1>
 <ul>
     <li *ngFor="let movie of movies">
-      {{movie.title}} ({{movie.voteCount}})
+      {{movie.title}} 
+      <span class="clickable" (click)="voteThumbsUp(movie)">({{movie.thumbsUp.length}} 👍🏻)</span> 
+      <span class="clickable"  (click)="voteThumbsDown(movie)">({{movie.thumbsDown.length}} 👎🏻)</span>
     </li>
 </ul>
 <input type="text" [(ngModel)]="newMovie">

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LocalService } from './services/local.service';
+import { UsersService } from './services/users.service';
 
 declare var window: any;
 declare var require: any
@@ -17,7 +17,7 @@ export class AppComponent implements OnInit  {
   username: string = '';
   modalTitle: string = 'Please enter your name'
 
-  constructor(private localService: LocalService) { }
+  constructor(private usersService: UsersService) { }
 
   ngOnInit(): void {
     window.bootstrap = require('bootstrap/dist/js/bootstrap.bundle.js');
@@ -26,22 +26,17 @@ export class AppComponent implements OnInit  {
       keyboard  : false
    });
 
-    const currentUser = this.localService.getData('user');
+    const currentUser = this.usersService.getCurrentUser();
     if (!currentUser) {
       this.openModal();
     } else {
-      this.username = JSON.parse(currentUser).username
+      this.username = currentUser.username
     }
   }
 
   saveUser() {
     if (this.username) {
-      const newId = 'id' + (new Date()).getTime();
-      const myUserData = {
-        id: newId,
-        username: this.username
-      };
-      this.localService.saveData('user', JSON.stringify(myUserData));
+      this.usersService.setCurrentUser(this.username);
       this.closeModal();
     } else {
       alert('Please set a name!')
