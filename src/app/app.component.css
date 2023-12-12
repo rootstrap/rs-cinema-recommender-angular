@@ -82,12 +82,11 @@
 
   .content {
     display: flex;
-    margin: 82px auto 32px;
+    margin: 10px auto 12px;
     padding: 0 16px;
     flex-direction: column;
     align-items: center;
     justify-content: flex-end;
-    background-color: pink;
     position:fixed;
     bottom:0px;
     width: 100%;

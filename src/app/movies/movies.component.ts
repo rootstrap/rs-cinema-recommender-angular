@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Movie } from '../models/movies.model';
+import { Movie, MovieSearch } from '../models/movies.model';
 
 import { MoviesService } from '../services/movies.service';
-import { LocalService } from '../services/local.service';
 import { User } from '../models/users.model';
 import { UsersService } from '../services/users.service';
+import { HttpService } from '../services/http.service';
+
+declare var window: any;
+declare var require: any
 
 @Component({
   selector: 'app-movies',
@@ -17,8 +19,10 @@ export class MoviesComponent implements OnInit {
 
   newMovie: string = '';
   currentUser: User;
+  moviesSearch?: MovieSearch;
+  showMoviesSearch: boolean = false;
 
-  constructor(private moviesService: MoviesService, private usersService: UsersService) {
+  constructor(private moviesService: MoviesService, private usersService: UsersService, private httpService: HttpService) {
     this.currentUser  = this.usersService.getCurrentUserOrGuest();
   }
 
@@ -68,6 +72,17 @@ export class MoviesComponent implements OnInit {
         thumbsUp: movie.thumbsUp.filter(({id}) => id !== this.currentUser?.id),
       });
     }
+  }
+
+  searchMovie () {
+    this.httpService.getMoviesFromName('search/movie', {
+      'query': this.newMovie
+    }).subscribe(
+      (response) => { 
+        this.moviesSearch = response as MovieSearch;
+        this.showMoviesSearch = true;
+       },
+      (error) => { console.log(error); });
   }
 
   ngOnInit(): void {

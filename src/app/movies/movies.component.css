@@ -6,3 +6,7 @@
 .clickable {
     cursor: pointer;
 }
+
+.movies-search-container {
+    margin-bottom: 50px;
+}
