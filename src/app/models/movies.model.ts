@@ -1,11 +1,11 @@
 import { User } from "./users.model";
 
-export interface Movie {
-    id?: string;
-    title: string;
+export interface MovieData {
     thumbsUp: User[];
     thumbsDown: User[];
 }
+
+export type Movie = MovieSearchInfo & MovieData;
 
 export interface MovieSearch { 
     page: number;
@@ -19,6 +19,7 @@ export interface MovieSearchInfo {
     backdrop_path: string;
     genre_ids: number[];
     id: number;
+    movieId?: number;
     original_language: string;
     original_title: string;
     overview: string;

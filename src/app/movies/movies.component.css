@@ -17,12 +17,20 @@
 
 .row-container {
     display: flex;
-    align-items: center;
     flex-wrap: wrap;
+    flex: 1;
 }
 
 .movie-item-container {
+    display: flex;
+    flex: 1;
     padding: 10px
+}
+
+.poster-button {
+    background-color: transparent;
+    border-width: 0;
+    display: flex;
 }
 
 .poster {
@@ -34,8 +42,15 @@
    margin-top: 15px;
 }
 
+.movie-title-container {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    width: 150px;
+}
+
 .movie-title {
     text-align: center;
     text-wrap: wrap;
-    width: 150px;
 }

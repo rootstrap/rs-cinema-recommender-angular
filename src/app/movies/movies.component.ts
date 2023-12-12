@@ -1,13 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Movie, MovieSearch } from '../models/movies.model';
+import { Movie, MovieSearch, MovieSearchInfo } from '../models/movies.model';
 
 import { MoviesService } from '../services/movies.service';
 import { User } from '../models/users.model';
 import { UsersService } from '../services/users.service';
 import { HttpService } from '../services/http.service';
-
-declare var window: any;
-declare var require: any
 
 @Component({
   selector: 'app-movies',
@@ -26,20 +23,20 @@ export class MoviesComponent implements OnInit {
     this.currentUser  = this.usersService.getCurrentUserOrGuest();
   }
 
-  addMovie() {
-    if (this.newMovie) {
-      const currentMovie = this.movies.find(({title}) => title.toLowerCase() === this.newMovie.toLowerCase());
-      if (currentMovie) {
-        this.voteThumbsUp(currentMovie);
-      } else { 
-        this.moviesService.addMovie({
-          title: this.newMovie.toUpperCase(),
-          thumbsUp: [ this.currentUser ],
-          thumbsDown: [],
-        });
-      }
-      this.newMovie = '';
+  addMovie(movie: MovieSearchInfo) {
+    const currentMovie = this.movies.find(({movieId}) => movieId === movie.id);
+    if (currentMovie) {
+      this.voteThumbsUp(currentMovie);
+    } else { 
+      this.moviesService.addMovie({
+        ...movie,
+        movieId: movie.id,
+        thumbsUp: [ this.currentUser ],
+        thumbsDown: [],
+      });
     }
+    this.newMovie = '';
+    this.showMoviesSearch = false;
   }
 
   voteThumbsUp(movie: Movie) {
@@ -76,7 +73,8 @@ export class MoviesComponent implements OnInit {
 
   searchMovie() {
     this.httpService.getMoviesFromName('search/movie', {
-      'query': this.newMovie
+      'query': this.newMovie,
+      'include_adult': false,
     }).subscribe(
       (response) => { 
         this.moviesSearch = response as MovieSearch;
