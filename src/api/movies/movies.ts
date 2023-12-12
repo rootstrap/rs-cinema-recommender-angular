@@ -16,7 +16,7 @@ export default {
             "popularity": 27.872,
             "poster_path": "/vgpXmVaVyUL7GGiDeiK1mKEKzcX.jpg",
             "release_date": "1995-12-15",
-            "title": "MANU GENIA",
+            "title": "Jumanji",
             "video": false,
             "vote_average": 7.239,
             "vote_count": 9949

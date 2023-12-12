@@ -12,10 +12,14 @@
 </div>
 
 <div class="movies-search-container" *ngIf="showMoviesSearch">
-  <li *ngFor="let movieSearch of moviesSearch?.results">
-      <a  href="{{movieSearch.backdrop_path}}">  
-        <span style="font-size: 20px;text-align: center;">{{movieSearch.title}}</span>
-      </a>
-      <img [src]="movieSearch.poster_path | posterUrl" class="poster">
-  </li>
+  <h3>Alguna de estas es la película que buscabas?</h3>
+  <div class="row-container">
+    <div class="movie-item-container" *ngFor="let movieSearch of moviesSearch?.results">
+        <img [src]="movieSearch.poster_path | posterUrl" class="poster" *ngIf="movieSearch.poster_path">
+        <h5 class="movie-title" *ngIf="!movieSearch.poster_path">
+          {{movieSearch.title}}
+        </h5>
+      </div>
+  </div>
+  <button type="button" class="btn btn-info nope-button" (click)="cancelSearch()">Nope</button>
 </div>

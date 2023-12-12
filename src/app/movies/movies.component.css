@@ -8,10 +8,34 @@
 }
 
 .movies-search-container {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
     margin-bottom: 50px;
+    padding: 20px;
+}
+
+.row-container {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.movie-item-container {
+    padding: 10px
 }
 
 .poster {
     height: auto;
-    width: 100px;
+    width: 150px;
+}
+
+.nope-button {
+   margin-top: 15px;
+}
+
+.movie-title {
+    text-align: center;
+    text-wrap: wrap;
+    width: 150px;
 }

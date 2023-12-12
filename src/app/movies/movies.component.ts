@@ -74,7 +74,7 @@ export class MoviesComponent implements OnInit {
     }
   }
 
-  searchMovie () {
+  searchMovie() {
     this.httpService.getMoviesFromName('search/movie', {
       'query': this.newMovie
     }).subscribe(
@@ -87,6 +87,10 @@ export class MoviesComponent implements OnInit {
       // use this for hardcoded data
       /* this.moviesSearch = this.httpService.getHardcodedMovies();
       this.showMoviesSearch = true; */
+  }
+
+  cancelSearch() {
+    this.showMoviesSearch = false;
   }
 
   ngOnInit(): void {
