@@ -24,13 +24,19 @@
 .movie-item-container {
     display: flex;
     flex: 1;
-    padding: 10px
+    padding: 30px 10px;
 }
 
 .poster-button {
     background-color: transparent;
     border-width: 0;
     display: flex;
+}
+
+.poster-button:hover {
+    -moz-transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    transform: scale(1.2);
 }
 
 .poster {
@@ -44,9 +50,11 @@
 
 .movie-title-container {
     align-items: center;
+    background-color: #d58cfc;
     display: flex;
     justify-content: center;
     height: 100%;
+    padding: 10px;
     width: 150px;
 }
 

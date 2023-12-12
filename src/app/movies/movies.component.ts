@@ -23,10 +23,15 @@ export class MoviesComponent implements OnInit {
     this.currentUser  = this.usersService.getCurrentUserOrGuest();
   }
 
+  clearSearch() {
+    this.newMovie = '';
+    this.cancelSearch();
+  }
+
   addMovie(movie: MovieSearchInfo) {
-    const currentMovie = this.movies.find(({movieId}) => movieId === movie.id);
+    const currentMovie = this.movies.find(({ movieId }) => movieId === movie.id);
     if (currentMovie) {
-      this.voteThumbsUp(currentMovie);
+      this.voteThumbsUp(currentMovie, true);
     } else { 
       this.moviesService.addMovie({
         ...movie,
@@ -34,15 +39,14 @@ export class MoviesComponent implements OnInit {
         thumbsUp: [ this.currentUser ],
         thumbsDown: [],
       });
+      this.clearSearch();
     }
-    this.newMovie = '';
-    this.showMoviesSearch = false;
   }
 
-  voteThumbsUp(movie: Movie) {
-    const thumbsUp = movie.thumbsUp.find(({id}) => id === this.currentUser?.id);
+  voteThumbsUp(movie: Movie, clearAfter?: boolean) {
+    const thumbsUp = movie.thumbsUp.find(({ id }) => id === this.currentUser?.id);
     if (thumbsUp) {
-      alert('Ya votaste esta película')
+      alert('Ya votaste esta película');
     } else {
       this.moviesService.updateMovie({
         ...movie,
@@ -50,13 +54,14 @@ export class MoviesComponent implements OnInit {
           ...movie.thumbsUp,
           this.currentUser,
         ],
-        thumbsDown: movie.thumbsDown.filter(({id}) => id !== this.currentUser?.id),
+        thumbsDown: movie.thumbsDown.filter(({ id }) => id !== this.currentUser?.id),
       });
+      clearAfter && this.clearSearch();
     }
   }
 
   voteThumbsDown(movie: Movie) {
-    const thumbsDown = movie.thumbsDown.find(({id}) => id === this.currentUser?.id);
+    const thumbsDown = movie.thumbsDown.find(({ id }) => id === this.currentUser?.id);
     if (thumbsDown) {
       alert('Ya votaste esta película')
     } else {
@@ -66,7 +71,7 @@ export class MoviesComponent implements OnInit {
           ...movie.thumbsDown,
           this.currentUser,
         ],
-        thumbsUp: movie.thumbsUp.filter(({id}) => id !== this.currentUser?.id),
+        thumbsUp: movie.thumbsUp.filter(({ id }) => id !== this.currentUser?.id),
       });
     }
   }
