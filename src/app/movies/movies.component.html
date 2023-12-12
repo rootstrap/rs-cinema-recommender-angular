@@ -13,9 +13,9 @@
 
 <div class="movies-search-container" *ngIf="showMoviesSearch">
   <li *ngFor="let movieSearch of moviesSearch?.results">
-       <a  href="{{movieSearch.backdrop_path}}">  
-           <span  style="font-size: 20px;text-align: center;">{{movieSearch.title}}                 
-            </span>
+      <a  href="{{movieSearch.backdrop_path}}">  
+        <span style="font-size: 20px;text-align: center;">{{movieSearch.title}}</span>
       </a>
+      <img [src]="movieSearch.poster_path | posterUrl" class="poster">
   </li>
 </div>

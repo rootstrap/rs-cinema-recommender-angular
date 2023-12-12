@@ -83,6 +83,10 @@ export class MoviesComponent implements OnInit {
         this.showMoviesSearch = true;
        },
       (error) => { console.log(error); });
+
+      // use this for hardcoded data
+      /* this.moviesSearch = this.httpService.getHardcodedMovies();
+      this.showMoviesSearch = true; */
   }
 
   ngOnInit(): void {

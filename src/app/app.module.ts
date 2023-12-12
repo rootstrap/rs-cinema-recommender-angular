@@ -11,6 +11,7 @@ import { environment } from 'src/environments/environment';
 import { WelcomeComponent } from './home/welcome.component';
 import { MoviesComponent } from './movies/movies.component';
 import { TvShowsComponent } from './tv-shows/tv-shows.component';
+import { PosterUrlPipe } from './shared/poster-url.pipe';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { TvShowsComponent } from './tv-shows/tv-shows.component';
     WelcomeComponent,
     MoviesComponent,
     TvShowsComponent,
+    PosterUrlPipe,
   ],
   imports: [
     BrowserModule,

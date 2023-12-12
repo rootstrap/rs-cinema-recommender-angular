@@ -10,3 +10,8 @@
 .movies-search-container {
     margin-bottom: 50px;
 }
+
+.poster {
+    height: auto;
+    width: 100px;
+}
