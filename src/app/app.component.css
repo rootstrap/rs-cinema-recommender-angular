@@ -23,6 +23,11 @@
     margin: 0;
   }
 
+  ::ng-deep body {
+    margin-top: 40px;
+    padding: 30px;
+  }
+
   .spacer {
     flex: 1;
   }
@@ -81,9 +86,9 @@
   }
 
   .content {
+    background-color: white;
     display: flex;
-    margin: 10px auto 12px;
-    padding: 0 16px;
+    padding: 12px;
     flex-direction: column;
     align-items: center;
     justify-content: flex-end;

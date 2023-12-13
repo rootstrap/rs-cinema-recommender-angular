@@ -1,4 +1,6 @@
 <h1 class="movies-container"> Qué películas recomiendan los Rootstrappers?</h1>
+<input type="text" [(ngModel)]="newMovie">
+<button (click)="searchMovie()">Add</button>
 <div *ngIf="!showMoviesSearch">
   <div class="row-container">
       <div class="movie-item-container" *ngFor="let movie of movies; index as index">
@@ -18,7 +20,7 @@
                   (mouseleave)="changeThumbsUpTooltip(index, false)">
             <mat-icon>thumb_up</mat-icon>
           </button>
-          <div class="thumb-up-tooltip" *ngIf="showThumbsUpTooltips[index]">
+          <div class="tooltip-common thumb-up-tooltip" *ngIf="showThumbsUpTooltips[index]">
             {{movie.thumbsUp.length}}
           </div>
           <button mat-icon-button 
@@ -28,14 +30,12 @@
                   (mouseleave)="changeThumbsDownTooltip(index, false)">
             <mat-icon>thumb_down</mat-icon>
           </button>
-          <div class="thumb-down-tooltip" *ngIf="showThumbsDownTooltips[index]">
+          <div class="tooltip-common thumb-down-tooltip" *ngIf="showThumbsDownTooltips[index]">
             {{movie.thumbsDown.length}}
           </div>
         </div>
       </div>
     </div>
-  <input type="text" [(ngModel)]="newMovie">
-  <button (click)="searchMovie()">Add</button>
 </div>
 
 <div class="movies-search-container" *ngIf="showMoviesSearch">
