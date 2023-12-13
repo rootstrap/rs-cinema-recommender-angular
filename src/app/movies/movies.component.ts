@@ -18,6 +18,8 @@ export class MoviesComponent implements OnInit {
   currentUser: User;
   moviesSearch?: MovieSearch;
   showMoviesSearch: boolean = false;
+  showThumbsUpTooltips: boolean[] = [];
+  showThumbsDownTooltips: boolean[] = [];
 
   constructor(private moviesService: MoviesService, private usersService: UsersService, private httpService: HttpService) {
     this.currentUser  = this.usersService.getCurrentUserOrGuest();
@@ -77,7 +79,7 @@ export class MoviesComponent implements OnInit {
   }
 
   searchMovie() {
-    this.httpService.getMoviesFromName('search/movie', {
+    /* this.httpService.getMoviesFromName('search/movie', {
       'query': this.newMovie,
       'include_adult': false,
     }).subscribe(
@@ -85,20 +87,35 @@ export class MoviesComponent implements OnInit {
         this.moviesSearch = response as MovieSearch;
         this.showMoviesSearch = true;
        },
-      (error) => { console.log(error); });
+      (error) => { console.log(error); }); */
 
       // use this for hardcoded data
-      /* this.moviesSearch = this.httpService.getHardcodedMovies();
-      this.showMoviesSearch = true; */
+      this.moviesSearch = this.httpService.getHardcodedMovies();
+      this.showMoviesSearch = true;
   }
 
   cancelSearch() {
     this.showMoviesSearch = false;
   }
 
+  changeThumbsUpTooltip(index: number, value: boolean) {
+    this.showThumbsUpTooltips[index] = value;
+  }
+
+  changeThumbsDownTooltip(index: number, value: boolean) {
+    this.showThumbsDownTooltips[index] = value;
+  }
+
+  emptyTooltips() {
+    this.showThumbsUpTooltips.fill(false);
+    this.showThumbsDownTooltips.fill(false);
+  }
+
   ngOnInit(): void {
     this.moviesService.getMovies().subscribe(movies => {
         this.movies = movies;
+        this.showThumbsUpTooltips.fill(false, 0, movies.length - 1);
+        this.showThumbsDownTooltips.fill(false, 0, movies.length - 1);
     });
   }
 }
