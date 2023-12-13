@@ -10,7 +10,7 @@ export class MoviesService {
   private movieRef;
 
   constructor(private firestore: AngularFirestore) { 
-   this.movieRef = this.firestore.collection<Movie>('movies', ref => ref.orderBy('thumbsUpCount','desc'));
+   this.movieRef = this.firestore.collection<Movie>('movies', ref => ref.orderBy('thumbsUpCount','desc').orderBy('thumbsDownCount').orderBy('title'));
   }
 
   addMovie(movie: Movie) {

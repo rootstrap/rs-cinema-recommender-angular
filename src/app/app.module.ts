@@ -16,6 +16,7 @@ import { WelcomeComponent } from './home/welcome.component';
 import { MoviesComponent } from './movies/movies.component';
 import { TvShowsComponent } from './tv-shows/tv-shows.component';
 import { PosterUrlPipe } from './shared/poster-url.pipe';
+import { TextFilterPipe } from './shared/text-filter.pipe';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { PosterUrlPipe } from './shared/poster-url.pipe';
     MoviesComponent,
     TvShowsComponent,
     PosterUrlPipe,
+    TextFilterPipe,
   ],
   imports: [
     BrowserAnimationsModule,

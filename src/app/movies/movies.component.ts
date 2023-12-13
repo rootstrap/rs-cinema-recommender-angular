@@ -20,6 +20,7 @@ export class MoviesComponent implements OnInit {
   showMoviesSearch: boolean = false;
   showThumbsUpTooltips: boolean[] = [];
   showThumbsDownTooltips: boolean[] = [];
+  titleFilter: string = '';
 
   constructor(private moviesService: MoviesService, private usersService: UsersService, private httpService: HttpService) {
     this.currentUser  = this.usersService.getCurrentUserOrGuest();
@@ -128,4 +129,5 @@ export class MoviesComponent implements OnInit {
         this.showThumbsDownTooltips.fill(false, 0, movies.length - 1);
     });
   }
+
 }

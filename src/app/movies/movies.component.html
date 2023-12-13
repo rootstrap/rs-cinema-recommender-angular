@@ -1,9 +1,10 @@
 <h1 class="movies-container"> Qué películas recomiendan los Rootstrappers?</h1>
 <div *ngIf="!showMoviesSearch">
+  <input type="text" placeholder="Search" [(ngModel)]="titleFilter">
   <input type="text" [(ngModel)]="newMovie">
   <button (click)="searchMovie()">Add</button>
   <div class="row-container">
-      <div class="movie-item-container" *ngFor="let movie of movies; index as index">
+      <div class="movie-item-container" *ngFor="let movie of movies | textFilter: titleFilter; index as index">
         <div class="poster-container">
             <img [src]="movie.poster_path | posterUrl" class="poster" *ngIf="movie.poster_path">
             <div class="movie-title-container" *ngIf="!movie.poster_path">
