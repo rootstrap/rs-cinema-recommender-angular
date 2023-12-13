@@ -1,8 +1,10 @@
 import { User } from "./users.model";
 
 export interface MovieData {
-    thumbsUp: User[];
     thumbsDown: User[];
+    thumbsUp: User[];
+    thumbsDownCount: number;
+    thumbsUpCount: number;   
 }
 
 export type Movie = MovieSearchInfo & MovieData;

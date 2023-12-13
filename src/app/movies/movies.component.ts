@@ -40,6 +40,8 @@ export class MoviesComponent implements OnInit {
         movieId: movie.id,
         thumbsUp: [ this.currentUser ],
         thumbsDown: [],
+        thumbsUpCount: 1,
+        thumbsDownCount: 0,
       });
       this.clearSearch();
     }
@@ -50,13 +52,17 @@ export class MoviesComponent implements OnInit {
     if (thumbsUp) {
       alert('Ya votaste esta película');
     } else {
+      const newThumbsUp = [
+        ...movie.thumbsUp,
+        this.currentUser,
+      ];
+      const newThumbsDown = movie.thumbsDown.filter(({ id }) => id !== this.currentUser?.id);
       this.moviesService.updateMovie({
         ...movie,
-        thumbsUp: [
-          ...movie.thumbsUp,
-          this.currentUser,
-        ],
-        thumbsDown: movie.thumbsDown.filter(({ id }) => id !== this.currentUser?.id),
+        thumbsUp: newThumbsUp,
+        thumbsDown: newThumbsDown,
+        thumbsUpCount: newThumbsUp.length,
+        thumbsDownCount: newThumbsDown.length,
       });
       clearAfter && this.clearSearch();
     }
@@ -67,19 +73,23 @@ export class MoviesComponent implements OnInit {
     if (thumbsDown) {
       alert('Ya votaste esta película')
     } else {
+      const newThumbsDown = [
+        ...movie.thumbsDown,
+        this.currentUser,
+      ];
+      const newThumbsUp = movie.thumbsUp.filter(({ id }) => id !== this.currentUser?.id);
       this.moviesService.updateMovie({
         ...movie,
-        thumbsDown: [
-          ...movie.thumbsDown,
-          this.currentUser,
-        ],
-        thumbsUp: movie.thumbsUp.filter(({ id }) => id !== this.currentUser?.id),
+        thumbsDown: newThumbsDown,
+        thumbsUp: newThumbsUp,
+        thumbsDownCount: newThumbsDown.length,
+        thumbsUpCount: newThumbsUp.length,
       });
     }
   }
 
   searchMovie() {
-    /* this.httpService.getMoviesFromName('search/movie', {
+    this.httpService.getMoviesFromName('search/movie', {
       'query': this.newMovie,
       'include_adult': false,
     }).subscribe(
@@ -87,11 +97,11 @@ export class MoviesComponent implements OnInit {
         this.moviesSearch = response as MovieSearch;
         this.showMoviesSearch = true;
        },
-      (error) => { console.log(error); }); */
+      (error) => { console.log(error); });
 
       // use this for hardcoded data
-      this.moviesSearch = this.httpService.getHardcodedMovies();
-      this.showMoviesSearch = true;
+      /* this.moviesSearch = this.httpService.getHardcodedMovies();
+      this.showMoviesSearch = true; */
   }
 
   cancelSearch() {
