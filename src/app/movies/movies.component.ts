@@ -27,8 +27,9 @@ export class MoviesComponent implements OnInit {
   }
 
   clearSearch() {
+    this.moviesSearch = undefined;
     this.newMovie = '';
-    this.cancelSearch();
+    this.showMoviesSearch = false;
   }
 
   addMovie(movie: MovieSearchInfo) {
@@ -89,6 +90,11 @@ export class MoviesComponent implements OnInit {
     }
   }
 
+  enterSearchMode() {
+    this.showMoviesSearch = true;
+    this.titleFilter = '';
+  }
+
   searchMovie() {
     this.httpService.getMoviesFromName('search/movie', {
       'query': this.newMovie,
@@ -96,17 +102,12 @@ export class MoviesComponent implements OnInit {
     }).subscribe(
       (response) => { 
         this.moviesSearch = response as MovieSearch;
-        this.showMoviesSearch = true;
        },
       (error) => { console.log(error); });
 
       // use this for hardcoded data
       /* this.moviesSearch = this.httpService.getHardcodedMovies();
       this.showMoviesSearch = true; */
-  }
-
-  cancelSearch() {
-    this.showMoviesSearch = false;
   }
 
   changeThumbsUpTooltip(index: number, value: boolean) {

@@ -1,8 +1,14 @@
-<h1 class="movies-container"> Qué películas recomiendan los Rootstrappers?</h1>
-<div *ngIf="!showMoviesSearch">
-  <input type="text" placeholder="Search" [(ngModel)]="titleFilter">
-  <input type="text" [(ngModel)]="newMovie">
-  <button (click)="searchMovie()">Add</button>
+<div class="flex-container" *ngIf="!showMoviesSearch">
+  <div class="title-container">
+    <h1 class="movies-container"> Qué películas recomiendan los Rootstrappers?</h1>
+    <button mat-icon-button 
+          class="add-button"
+          (click)="enterSearchMode()"
+            >
+      <mat-icon>add_to_queue</mat-icon>
+    </button>
+  </div>
+  <input type="text" class="search-input title-search-input" placeholder="Search" [(ngModel)]="titleFilter">
   <div class="row-container">
       <div class="movie-item-container" *ngFor="let movie of movies | textFilter: titleFilter; index as index">
         <div class="poster-container">
@@ -40,18 +46,27 @@
 </div>
 
 <div class="movies-search-container" *ngIf="showMoviesSearch">
-  <h3>Alguna de estas es la película que buscabas?</h3>
-  <div class="row-container">
-    <div class="movie-item-container" *ngFor="let movieSearch of moviesSearch?.results">
-      <button class="poster-button" (click)="addMovie(movieSearch)">
-          <img [src]="movieSearch.poster_path | posterUrl" class="poster" *ngIf="movieSearch.poster_path">
-          <div class="movie-title-container" *ngIf="!movieSearch.poster_path">
-            <h5 class="movie-title">
-              {{movieSearch.title}}
-            </h5>
-          </div>
-      </button>
+  <h3>Buscá la película que querés recomendar:</h3>
+  <div class="search-container">
+    <input type="text" class="search-input" placeholder="Search Movie" [(ngModel)]="newMovie">
+    <button mat-icon-button class="search-icon" (click)="searchMovie()" >
+      <mat-icon>search</mat-icon>
+    </button>
+    <button type="button" class="btn btn-info go-back-button" (click)="clearSearch()">Volver</button>
+  </div>
+  <div class="movies-search" *ngIf="moviesSearch?.results">
+    <h4>Alguna de estas es la película que buscabas?</h4>
+    <div class="row-container">
+      <div class="movie-item-container" *ngFor="let movieSearch of moviesSearch?.results">
+        <button class="poster-button" (click)="addMovie(movieSearch)">
+            <img [src]="movieSearch.poster_path | posterUrl" class="poster" *ngIf="movieSearch.poster_path">
+            <div class="movie-title-container" *ngIf="!movieSearch.poster_path">
+              <h5 class="movie-title">
+                {{movieSearch.title}}
+              </h5>
+            </div>
+        </button>
+      </div>
     </div>
   </div>
-  <button type="button" class="btn btn-info nope-button" (click)="cancelSearch()">Nope</button>
 </div>
