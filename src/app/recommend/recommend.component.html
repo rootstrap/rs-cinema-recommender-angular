@@ -1,6 +1,6 @@
 <div class="flex-container" *ngIf="!showMoviesSearch">
   <div class="title-container">
-    <h1 class="movies-container"> Qué películas recomiendan los Rootstrappers?</h1>
+    <h1 class="movies-container">{{title}}</h1>
     <button mat-icon-button 
           class="add-button"
           (click)="enterSearchMode()"
@@ -46,16 +46,16 @@
 </div>
 
 <div class="movies-search-container" *ngIf="showMoviesSearch">
-  <h3>Buscá la película que querés recomendar:</h3>
+  <h3>{{searchTitle}}</h3>
   <div class="search-container">
-    <input type="text" class="search-input" placeholder="Search Movie" [(ngModel)]="newRecommendation">
+    <input type="text" class="search-input" [placeholder]="searchPlaceholder" [(ngModel)]="newRecommendation">
     <button mat-icon-button class="search-icon" (click)="searchRecommendation()" >
       <mat-icon>search</mat-icon>
     </button>
     <button type="button" class="btn btn-info go-back-button" (click)="clearSearch()">Volver</button>
   </div>
   <div class="movies-search" *ngIf="recommendSearch?.results">
-    <h4>Alguna de estas es la película que buscabas?</h4>
+    <h4>{{searchMessage}}</h4>
     <div class="row-container">
       <div class="movie-item-container" *ngFor="let movieSerieSearch of recommendSearch?.results">
         <button class="poster-button" (click)="addRecommendation(movieSerieSearch)">

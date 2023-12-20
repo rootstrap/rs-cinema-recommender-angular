@@ -28,6 +28,10 @@ export class MoviesComponent implements OnInit, OnDestroy {
   showThumbsUpTooltips: boolean[] = [];
   showThumbsDownTooltips: boolean[] = [];
   titleFilter: string = '';
+  title: string = '';
+  searchTitle: string = '';
+  searchPlaceholder: string = '';
+  searchMessage: string = '';
 
   constructor(private moviesService: MoviesService, 
               private seriesService: SeriesService, 
@@ -174,8 +178,12 @@ export class MoviesComponent implements OnInit, OnDestroy {
           this.recommendations = series;
           this.showThumbsUpTooltips.fill(false, 0, series.length - 1);
           this.showThumbsDownTooltips.fill(false, 0, series.length - 1);
-      });
+        });
       }
+      this.title = `Qué ${this.isMovies ? 'películas' : 'series'} recomiendan los Rootstrappers?`
+      this.searchTitle = `Buscá la ${this.isMovies ? 'película' : 'serie'} que querés recomendar:`
+      this.searchPlaceholder = `Search ${this.isMovies ? 'Movie' : 'TV Show'}`
+      this.searchMessage = `Alguna de estas es la ${this.isMovies ? 'película' : 'serie'} que buscabas?`
       this.clearSearch();
     })
   }
