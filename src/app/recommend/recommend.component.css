@@ -122,6 +122,8 @@
     top: -20px;
 }
 
+.add-button:hover,
+.search-icon:hover,
 .thumb-down:hover,
 .thumb-up:hover {
     -moz-transform: scale(1.3);

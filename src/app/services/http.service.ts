@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from  '@angular/common/http';
 
 import movies from 'src/api/movies/movies';
-import { MovieSearch } from '../models/movies.model';
+import { MoviesSeriesSearch } from '../models/movies-series.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,7 @@ export class HttpService {
 
   constructor(private http: HttpClient) { }
 
-  getMoviesFromName(url2: string, params: any) {
+  getDataFromMDB(url2: string, params: any) {
     return this.http.get(`${this.BASE_URL}${url2}`,{
       params: {
         ...params,
@@ -24,8 +24,8 @@ export class HttpService {
     });
   }
 
-  getHardcodedMovies(): MovieSearch {
-    return movies as MovieSearch;
+  getHardcodedMovies(): MoviesSeriesSearch {
+    return movies as MoviesSeriesSearch;
   }
 
   getPosterUrl(path:string) {

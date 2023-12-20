@@ -13,8 +13,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { environment } from 'src/environments/environment';
 import { WelcomeComponent } from './home/welcome.component';
-import { MoviesComponent } from './movies/movies.component';
-import { TvShowsComponent } from './tv-shows/tv-shows.component';
+import { MoviesComponent } from './recommend/recommend.component';
 import { PosterUrlPipe } from './shared/poster-url.pipe';
 import { TextFilterPipe } from './shared/text-filter.pipe';
 
@@ -24,7 +23,6 @@ import { TextFilterPipe } from './shared/text-filter.pipe';
     AppComponent, 
     WelcomeComponent,
     MoviesComponent,
-    TvShowsComponent,
     PosterUrlPipe,
     TextFilterPipe,
   ],

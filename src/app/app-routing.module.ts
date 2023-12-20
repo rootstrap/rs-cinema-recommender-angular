@@ -2,13 +2,12 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { WelcomeComponent } from './home/welcome.component';
-import { MoviesComponent } from './movies/movies.component';
-import { TvShowsComponent } from './tv-shows/tv-shows.component';
+import { MoviesComponent } from './recommend/recommend.component';
 
 const routes: Routes = [
   { path: 'welcome', component: WelcomeComponent },
-  { path: 'movies', component: MoviesComponent },
-  { path: 'tv-shows', component: TvShowsComponent },
+  { path: 'recommend', component: MoviesComponent },
+  { path: 'recommend/:type', component: MoviesComponent },
   { path: '', redirectTo: 'welcome', pathMatch: 'full' },
   { path: '**', redirectTo: 'welcome', pathMatch: 'full' },
 ];

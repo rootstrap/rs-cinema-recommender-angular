@@ -11,10 +11,10 @@
         <a class="nav-link" routerLink="/welcome" routerLinkActive="active">Home</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/movies" routerLinkActive="active">Movies</a>
+        <a class="nav-link" [routerLink]="['/recommend','movie']" routerLinkActive="active">Movies</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/tv-shows" routerLinkActive="active">TV Shows</a>
+        <a class="nav-link" [routerLink]="['/recommend','tv']" routerLinkActive="active">TV Shows</a>
       </li>
     </ul>
   </div>

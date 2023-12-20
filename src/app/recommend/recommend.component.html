@@ -10,35 +10,35 @@
   </div>
   <input type="text" class="search-input title-search-input" placeholder="Search" [(ngModel)]="titleFilter">
   <div class="row-container">
-      <div class="movie-item-container" *ngFor="let movie of movies | textFilter: titleFilter; index as index">
+      <div class="movie-item-container" *ngFor="let recommendation of recommendations | textFilter: titleFilter; index as index">
         <div class="poster-container">
-            <img [src]="movie.poster_path | posterUrl" class="poster" *ngIf="movie.poster_path">
-            <div class="movie-title-container" *ngIf="!movie.poster_path">
+            <img [src]="recommendation.poster_path | posterUrl" class="poster" *ngIf="recommendation.poster_path">
+            <div class="movie-title-container" *ngIf="!recommendation.poster_path">
               <h5 class="movie-title">
-                {{movie.title}} 
+                {{recommendation.title}} 
               </h5>
             </div>
         </div>
         <div class="thumbs-container">
           <button mat-icon-button 
                   class="thumb-up" 
-                  (click)="voteThumbsUp(movie)" 
+                  (click)="voteThumbsUp(recommendation)" 
                   (mouseenter)="changeThumbsUpTooltip(index, true)" 
                   (mouseleave)="changeThumbsUpTooltip(index, false)">
             <mat-icon>thumb_up</mat-icon>
           </button>
           <div class="tooltip-common thumb-up-tooltip" *ngIf="showThumbsUpTooltips[index]">
-            {{movie.thumbsUpCount}}
+            {{recommendation.thumbsUpCount}}
           </div>
           <button mat-icon-button 
                   class="thumb-down" 
-                  (click)="voteThumbsDown(movie)"
+                  (click)="voteThumbsDown(recommendation)"
                   (mouseenter)="changeThumbsDownTooltip(index, true)" 
                   (mouseleave)="changeThumbsDownTooltip(index, false)">
             <mat-icon>thumb_down</mat-icon>
           </button>
           <div class="tooltip-common thumb-down-tooltip" *ngIf="showThumbsDownTooltips[index]">
-            {{movie.thumbsDownCount}}
+            {{recommendation.thumbsDownCount}}
           </div>
         </div>
       </div>
@@ -48,21 +48,21 @@
 <div class="movies-search-container" *ngIf="showMoviesSearch">
   <h3>Buscá la película que querés recomendar:</h3>
   <div class="search-container">
-    <input type="text" class="search-input" placeholder="Search Movie" [(ngModel)]="newMovie">
-    <button mat-icon-button class="search-icon" (click)="searchMovie()" >
+    <input type="text" class="search-input" placeholder="Search Movie" [(ngModel)]="newRecommendation">
+    <button mat-icon-button class="search-icon" (click)="searchRecommendation()" >
       <mat-icon>search</mat-icon>
     </button>
     <button type="button" class="btn btn-info go-back-button" (click)="clearSearch()">Volver</button>
   </div>
-  <div class="movies-search" *ngIf="moviesSearch?.results">
+  <div class="movies-search" *ngIf="recommendSearch?.results">
     <h4>Alguna de estas es la película que buscabas?</h4>
     <div class="row-container">
-      <div class="movie-item-container" *ngFor="let movieSearch of moviesSearch?.results">
-        <button class="poster-button" (click)="addMovie(movieSearch)">
-            <img [src]="movieSearch.poster_path | posterUrl" class="poster" *ngIf="movieSearch.poster_path">
-            <div class="movie-title-container" *ngIf="!movieSearch.poster_path">
+      <div class="movie-item-container" *ngFor="let movieSerieSearch of recommendSearch?.results">
+        <button class="poster-button" (click)="addRecommendation(movieSerieSearch)">
+            <img [src]="movieSerieSearch.poster_path | posterUrl" class="poster" *ngIf="movieSerieSearch.poster_path">
+            <div class="movie-title-container" *ngIf="!movieSerieSearch.poster_path">
               <h5 class="movie-title">
-                {{movieSearch.title}}
+                {{movieSerieSearch.title}}
               </h5>
             </div>
         </button>
