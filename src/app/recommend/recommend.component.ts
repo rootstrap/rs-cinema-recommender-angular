@@ -165,7 +165,7 @@ export class MoviesComponent implements OnInit, OnDestroy {
   }
 
   goToDetails(recommendation: MovieSerie) {
-    this.router.navigate(['/details',recommendation.id]);
+    this.router.navigate(['/details',this.type,recommendation.id]);
   }
 
   ngOnInit(): void {

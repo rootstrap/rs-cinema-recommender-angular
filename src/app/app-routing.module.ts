@@ -9,7 +9,7 @@ const routes: Routes = [
   { path: 'welcome', component: WelcomeComponent },
   { path: 'recommend', component: MoviesComponent },
   { path: 'recommend/:type', component: MoviesComponent },
-  { path: 'details/:id', component: DetailsComponent },
+  { path: 'details/:type/:id', component: DetailsComponent },
   { path: '', redirectTo: 'welcome', pathMatch: 'full' },
   { path: '**', redirectTo: 'welcome', pathMatch: 'full' },
 ];
