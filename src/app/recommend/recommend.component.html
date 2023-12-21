@@ -10,15 +10,15 @@
   </div>
   <input type="text" class="search-input title-search-input" placeholder="Search" [(ngModel)]="titleFilter">
   <div class="row-container">
-      <div class="movie-item-container" *ngFor="let recommendation of recommendations | textFilter: titleFilter; index as index">
-        <div class="poster-container">
-            <img [src]="recommendation.poster_path | posterUrl" class="poster" *ngIf="recommendation.poster_path">
-            <div class="movie-title-container" *ngIf="!recommendation.poster_path">
-              <h5 class="movie-title">
-                {{recommendation.title}} 
-              </h5>
-            </div>
-        </div>
+      <div class="movie-item-container" *ngFor="let recommendation of recommendations | textFilter: titleFilter; index as index">    
+        <button class="poster-container" (click)="goToDetails(recommendation)">
+          <img [src]="recommendation.poster_path | posterUrl" class="poster" *ngIf="recommendation.poster_path">
+          <div class="movie-title-container" *ngIf="!recommendation.poster_path">
+            <h5 class="movie-title">
+              {{recommendation.title}} 
+            </h5>
+          </div>
+        </button>
         <div class="thumbs-container">
           <button mat-icon-button 
                   class="thumb-up" 

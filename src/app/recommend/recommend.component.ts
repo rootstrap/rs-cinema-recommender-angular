@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MovieSerie, MoviesSeriesSearch, MovieSeriesSearchInfo, RecommendType } from '../models/movies-series.model';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { MoviesService } from '../services/movies.service';
@@ -37,7 +37,8 @@ export class MoviesComponent implements OnInit, OnDestroy {
               private seriesService: SeriesService, 
               private usersService: UsersService,
               private httpService: HttpService, 
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private router: Router) {
     this.currentUser  = this.usersService.getCurrentUserOrGuest();
   }
 
@@ -161,6 +162,10 @@ export class MoviesComponent implements OnInit, OnDestroy {
   emptyTooltips() {
     this.showThumbsUpTooltips.fill(false);
     this.showThumbsDownTooltips.fill(false);
+  }
+
+  goToDetails(recommendation: MovieSerie) {
+    this.router.navigate(['/details',recommendation.id]);
   }
 
   ngOnInit(): void {

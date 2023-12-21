@@ -77,6 +77,12 @@
     transform: scale(1.2);
 }
 
+.poster-container:hover {
+    -moz-transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
 .poster {
     height: auto;
     width: 150px;
