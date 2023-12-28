@@ -27,4 +27,8 @@ export class MoviesService {
   getMovies(): Observable<MovieSerie[]> {
     return this.movieRef.valueChanges({ idField: 'id' });
   }
+
+  getMovie(id: string): Observable<MovieSerie | undefined> {
+    return this.firestore.doc<MovieSerie>(`movies/${id}`).valueChanges();
+  }
 }
