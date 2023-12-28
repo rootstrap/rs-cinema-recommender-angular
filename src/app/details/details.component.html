@@ -1,4 +1,16 @@
 <div class="title-container">
-    <h1>Detalles del producto {{id}} para {{type}}</h1>
+    <h1>Detalles de {{title}}</h1>
     <button type="button" class="btn btn-info go-back-button" (click)="goBack()">Volver</button>
+</div>
+<div style="display: flex;" *ngIf="donutChartData">
+    <h4>Según los Rootstrappers es: </h4>
+    <div>
+        <canvas baseChart
+            [labels]="donutChartLabels"
+            [datasets]="donutChartData"
+            [options]="donutChartOptions"
+            [legend]="false"
+            chartType="doughnut">
+        </canvas>
+    </div>
 </div>

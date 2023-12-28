@@ -7,11 +7,13 @@ import { SeriesService } from '../services/series.service';
 import { UsersService } from '../services/users.service';
 import { HttpService } from '../services/http.service';
 import { MovieSerie, RecommendType } from '../models/movies-series.model';
+import { ChartDataSets } from 'chart.js';
+import { Color } from 'ng2-charts';
 
 @Component({
   selector: 'app-details',
   templateUrl: './details.component.html',
-  styleUrls: ['./details.component.css']
+  styleUrls: ['./details.component.css'],
 })
 
 export class DetailsComponent implements OnInit {
@@ -20,6 +22,16 @@ export class DetailsComponent implements OnInit {
   isMovie: boolean = true;
   details?: MovieSerie;
   extraDetails = {};
+  title: string = "";
+
+  donutChartData?: ChartDataSets[];
+  donutChartLabels: string[] = ['Buena', 'Mala'];
+  donutChartOptions: any = {
+    responsive: true,
+    maintainAspectRatio: false,
+  };
+  donutChartType = "doughnut";
+
 
   constructor(private moviesService: MoviesService, 
     private seriesService: SeriesService, 
@@ -33,6 +45,16 @@ export class DetailsComponent implements OnInit {
   }
 
   getExtraDetails(id?: number) {
+    console.log('this.details: ',this.details)
+    if (this.details) {
+      this.donutChartData = [{
+        data: [this.details.thumbsUpCount, this.details.thumbsDownCount],
+        backgroundColor: ['#1B946C', '#B61A21'],
+      }];
+      this.title = this.details?.title ?? this.details?.name ?? '';
+      console.log('this.donutChartData: ',this.donutChartData)
+    }
+
     if (id) {
       this.httpService.getDataFromMDB(`${this.isMovie ? 'movie' : 'tv'}/${id}`,{})
       .subscribe((response) => { 
@@ -52,13 +74,17 @@ export class DetailsComponent implements OnInit {
     if (this.id) {
       if (this.isMovie) {
         this.moviesService.getMovie(this.id).subscribe(response => {
-          this.details = response;
-          this.getExtraDetails(response?.movieId);
+          if (!this.details) {
+            this.details = response;
+            this.getExtraDetails(response?.movieId);
+          }
         })
       } else {
         this.seriesService.getSerie(this.id).subscribe(response => {
-          this.details = response;
-          this.getExtraDetails(response?.seriesId);
+          if (!this.details) {
+            this.details = response;
+            this.getExtraDetails(response?.seriesId);
+          }
         })
       }
     }
